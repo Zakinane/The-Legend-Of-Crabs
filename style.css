@@ -1,0 +1,121 @@
+@font-face {
+  font-family: "Kraby Patty";
+  src: url(assets/Krabby\ Patty.ttf);
+}
+* {
+  margin: 0px;
+}
+
+html {
+  font-family: "Kraby Patty";
+  background-color: rgb(48, 48, 48);
+  cursor: none;
+  overflow: hidden;
+  cursor: url("img/cursor/cursorPtr.png"), auto;
+}
+a {
+  color: green;
+}
+a:hover {
+  cursor: url("img/cursor/cursorHover.png"), auto;
+}
+/*Mobile*/
+@media screen and (min-width: 320px) {
+}
+
+/*Tablette*/
+@media screen and (min-width: 768px) {
+}
+
+/*PC*/
+@media screen and (min-width: 1200px) {
+  .container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+  }
+  .screen {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("img/title.png");
+    height: 100%;
+    animation: fade-in 6s ease-in forwards;
+  }
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      background-color: #051630;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  .title {
+    z-index: 100;
+    position: fixed;
+    top: -500px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    padding-top: 40px;
+    animation: moveDown 5s ease-in forwards;
+    animation-delay: 5s;
+  }
+  @keyframes moveDown {
+    0% {
+      top: -500px;
+    }
+    100% {
+      top: 10%;
+    }
+  }
+  .Start {
+    padding: 10px;
+    z-index: 101;
+    position: fixed;
+    bottom: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 125px;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    border: solid rgb(132, 132, 132) 3px;
+  }
+
+  .credits {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .controls {
+    color: rgb(245, 251, 184);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .controlsPic {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    color: white;
+  }
+  .controlsPicture {
+    height: 60px;
+  }
+  .SoundButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 80px;
+    cursor: url("img/cursor/cursorHover.png"), auto;
+  }
+  .ReplayIntro {
+    position: absolute;
+    top: 100px;
+    right: 10px;
+    cursor: url("img/cursor/cursorHover.png"), auto;
+  }
+}
