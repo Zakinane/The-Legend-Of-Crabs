@@ -1,0 +1,135 @@
+@font-face {
+  font-family: "Kraby Patty";
+  src: url(../assets/Krabby\ Patty.ttf);
+}
+* {
+  margin: 0px;
+}
+main{
+    background-color: #051630;
+}
+html {
+  font-family: "Kraby Patty";
+  background-color: rgb(48, 48, 48);
+  cursor: none;
+  overflow: hidden;
+  cursor: url("../img/cursor/cursorPtr.png"), auto;
+}
+a {
+  color: green;
+}
+a:hover {
+  cursor: url("../img/cursor/cursorHover.png"), auto;
+}
+/*Mobile*/
+@media screen and (min-width: 320px) {
+}
+
+/*Tablette*/
+@media screen and (min-width: 768px) {
+}
+
+/*PC*/
+@media screen and (min-width: 1200px) {
+  .container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+  }
+  .screen {
+    background-color: #051630;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../img/title.png");
+    height: 100%;
+    position: relative; /* Ensure top positioning works */
+    animation: going-down 3s ease-in forwards;
+  }
+  
+  @keyframes going-down {
+    0% {
+      top: 0px;
+    }
+    100% {
+      top: 400px;
+    }
+  }
+  
+  .title {
+    z-index: 100;
+    position: fixed;
+    top: -500px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    padding-top: 40px;
+    animation: moveDown 5s ease-in forwards;
+    animation-delay: 5s;
+  }
+  @keyframes moveDown {
+    0% {
+      top: -500px;
+    }
+    100% {
+      top: 10%;
+    }
+  }
+  .Start {
+    padding: 10px;
+    z-index: 101;
+    position: fixed;
+    bottom: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 125px;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    border: solid rgb(132, 132, 132) 3px;
+    animation: clignotte alternate-reverse 1s infinite;
+  }
+  @keyframes clignotte {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .credits {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .controls {
+    color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .controlsPic {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    color: white;
+  }
+  .controlsPicture {
+    height: 60px;
+  }
+  .SoundButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 80px;
+    cursor: url("../img/cursor/cursorHover.png"), auto;
+  }
+  .ReplayIntro {
+    position: absolute;
+    top: 100px;
+    right: 10px;
+    cursor: url("../img/cursor/cursorHover.png"), auto;
+  }
+}

@@ -95,7 +95,7 @@ a:hover {
     align-items: center;
   }
   .controls {
-    color: rgb(245, 251, 184);
+    color: green;
     display: flex;
     align-items: center;
     justify-content: center;
