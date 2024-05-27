@@ -101,6 +101,7 @@ a:hover {
   transform: translateX(-50%);
   bottom: 0px;
   margin-bottom: 100px;
+  cursor: url("../img/cursor/cursorHover.png"), auto;
   animation: decollage 1s 3s ease-in forwards;
 }
 @keyframes decollage {

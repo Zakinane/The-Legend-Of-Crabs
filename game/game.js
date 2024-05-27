@@ -8,7 +8,7 @@ function getScreenBounds() {
 //AUDIO
 document.addEventListener("DOMContentLoaded", function () {
   var BoutonAudio = document.querySelector(".SoundButton");
-  var audio = document.querySelector("audio");
+  var audio = document.querySelector(".audio");
 
   BoutonAudio.addEventListener("click", function () {
     if (audio.paused) {
@@ -31,6 +31,12 @@ const You = document.querySelector(".You");
 function getXpos() {
   return You.getBoundingClientRect().left;
 }
+
+//money
+You.addEventListener("click", function(){
+  var audioMoney = document.querySelector(".moneyAudio");
+  audioMoney.play();
+});
 
 //ACTIONS
 function goLeft() {
@@ -74,3 +80,6 @@ document.addEventListener("keydown", (event) => {
       break;
   }
 });
+
+//DEATH
+
