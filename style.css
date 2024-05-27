@@ -81,6 +81,11 @@ a:hover {
     background-color: rgb(255, 255, 255);
     text-align: center;
     border: solid rgb(132, 132, 132) 3px;
+    animation: clignotte alternate-reverse 1s infinite;
+  }
+  @keyframes clignotte {
+    from {opacity: 0;}
+    to {opacity: 1;}
   }
 
   .credits {

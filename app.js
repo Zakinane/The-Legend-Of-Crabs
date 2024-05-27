@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var BoutonAudio = document.querySelector(".SoundButton");
   var audio = document.querySelector("audio");
   var ReplayIntro = document.querySelector(".ReplayIntro");
+  var StartButton = document.querySelector(".Start");
+
 
   audio.setAttribute("autoplay", "true");
 
@@ -26,4 +28,9 @@ document.addEventListener("DOMContentLoaded", function () {
     BoutonAudio.setAttribute("src", "img/SoundON.png");
     audio.play();
   });
+
+  setTimeout(() => {
+    StartButton.removeAttribute("hidden");
+  }, 16000);
+  
 });
