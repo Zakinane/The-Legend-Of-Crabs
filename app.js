@@ -6,8 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
   var StartButton = document.querySelector(".Start");
 
 
-  audio.setAttribute("autoplay", "true");
-
   BoutonAudio.addEventListener("click", function () {
     if (audio.paused) {
       BoutonAudio.setAttribute("src", "img/SoundON.png");
