@@ -5,8 +5,8 @@
 * {
   margin: 0px;
 }
-main{
-    background-color: #051630;
+main {
+  background-color: #051630;
 }
 html {
   font-family: "Kraby Patty";
@@ -46,54 +46,13 @@ a:hover {
     position: relative; /* Ensure top positioning works */
     animation: going-down 3s ease-in forwards;
   }
-  
+
   @keyframes going-down {
     0% {
       top: 0px;
     }
     100% {
       top: 400px;
-    }
-  }
-  
-  .title {
-    z-index: 100;
-    position: fixed;
-    top: -500px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 400px;
-    padding-top: 40px;
-    animation: moveDown 5s ease-in forwards;
-    animation-delay: 5s;
-  }
-  @keyframes moveDown {
-    0% {
-      top: -500px;
-    }
-    100% {
-      top: 10%;
-    }
-  }
-  .Start {
-    padding: 10px;
-    z-index: 101;
-    position: fixed;
-    bottom: 40%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 125px;
-    background-color: rgb(255, 255, 255);
-    text-align: center;
-    border: solid rgb(132, 132, 132) 3px;
-    animation: clignotte alternate-reverse 1s infinite;
-  }
-  @keyframes clignotte {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
     }
   }
 
@@ -132,4 +91,30 @@ a:hover {
     right: 10px;
     cursor: url("../img/cursor/cursorHover.png"), auto;
   }
+}
+
+.You {
+  position: absolute;
+  z-index: 103;
+  width: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0px;
+  margin-bottom: 100px;
+  animation: decollage 1s 3s ease-in forwards;
+}
+@keyframes decollage {
+  0% {
+    bottom: 0px;
+  }
+  100% {
+    bottom: 40%;
+  }
+}
+.projectile{
+  position: absolute;
+  height: 20px;
+  z-index: 102;
+  bottom: 40%;
+  margin-bottom: 150px;
 }

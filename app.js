@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   audio.addEventListener("ended", function () {
-    ReplayIntro.removeAttribute("hidden");
+    ReplayIntro.Attribute("hidden");
   });
 
   ReplayIntro.addEventListener("click", function () {
