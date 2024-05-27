@@ -1,2 +1,2 @@
-# Link https://zakinane.github.io/The-Legend-Of-Crabs/
+# Link : https://zakinane.github.io/The-Legend-Of-Crabs/
 # Still in the making
