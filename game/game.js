@@ -50,7 +50,9 @@ function createEnemy() {
   enemy.classList.add("enemy");
   enemy.src = "../img/plankton.png";
 
-  enemy.style.left = Math.random() * (screen.width)/*la change*/ + "px";
+  const { left: MAX_LEFT, right: MAX_RIGHT } = getScreenBounds();
+  const enemyWidth = 50; // Assuming enemy width is 50px
+  enemy.style.left = Math.random() * (MAX_RIGHT - MAX_LEFT - enemyWidth) + MAX_LEFT + "px";
   enemy.style.top = "-200px";
   enemies.push(enemy);
   screen.appendChild(enemy);
@@ -157,13 +159,13 @@ function Controls() {
     const timeSinceLastShot = currentTime - lastShotTime;
 
     // ver normale
+    if (timeSinceLastShot > 500) { //latence
+      ShootUp();
+      lastShotTime = currentTime;
+    }
 
-    // if (timeSinceLastShot > 500) { //latence
-    //   ShootUp();
-    //   lastShotTime = currentTime;
-    // }
-    
-    ShootUp(); //A SUP TIR RAFALE
+    //TIR RAFALE
+    //ShootUp(); 
   }
   if (keys["ArrowLeft"]) {
     goLeft();
