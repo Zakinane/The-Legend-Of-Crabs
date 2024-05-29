@@ -1,11 +1,11 @@
-////////////////////////////////SCREEN
+///////////////////////////////////////////////////////////////////////////////////////////SCREEN
 const screen = document.querySelector("main");
 function getScreenBounds() {
   const rect = screen.getBoundingClientRect();
   return { left: rect.left, right: rect.right };
 }
 
-////////////////////////////////AUDIO
+////////////////////////////////////////////////////////////////////////////////////////////AUDIO
 //ost
 document.addEventListener("DOMContentLoaded", function () {
   var BoutonAudio = document.querySelector(".SoundButton");
@@ -27,9 +27,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 //others
 const pioupiou = document.querySelector(".pioupiou");
-const boumEnemy = document.querySelector(".boumEnemy")
+const boumEnemy = document.querySelector(".boumEnemy");
 
-///////////////////////////////////////////////ME
+///////////////////////////////////////////////////////////////////////////////////////////////ME
 const You = document.querySelector(".You");
 
 function getXpos() {
@@ -41,37 +41,54 @@ You.addEventListener("click", function () {
   audioMoney.play();
 });
 
+//////////////////////////////////////////////////////////////////////////////////////////////ENEMY
 
-/////////////////////////////////////////////ENEMY
-const enemyTest = document.querySelector(".enemyTest")
-// const enemies = [];
+const enemies = [];
 
-// function createEnemy() {
-//   const enemy = document.createElement("img");
-//   enemy.classList.add("enemy");
-//   enemy.src = "../img/plankton.png";
-//   enemy.style.left = You.style.left;
-//   enemies.push(enemy);
-//   screen.appendChild(enemy);
+function createEnemy() {
+  const enemy = document.createElement("img");
+  enemy.classList.add("enemy");
+  enemy.src = "../img/plankton.png";
 
-//   setTimeout(createEnemy,1000);
-// }
-// setTimeout(createEnemy,2000);
+  enemy.style.left = Math.random() * (screen.width)/*la change*/ + "px";
+  enemy.style.top = "-200px";
+  enemies.push(enemy);
+  screen.appendChild(enemy);
 
-function deathEnemy(enemyTest, ProjX, ProjY, ProjW) {
+  // Move enemy downward
+  function moveEnemy() {
+    let currentTop = parseInt(enemy.style.top);
+    enemy.style.top = currentTop + 2 + "px";
+
+    if (1) {
+      requestAnimationFrame(moveEnemy);
+    } else {
+      enemy.remove();
+    }
+  }
+  requestAnimationFrame(moveEnemy);
+
+  setTimeout(createEnemy, 2000);
+}
+setTimeout(createEnemy, 2000);
+
+function deathEnemy(enemy, projRect) {
+  const enemyRect = enemy.getBoundingClientRect();
+
   if (
-    ProjY <= enemyTest.y + enemyTest.height &&
-    ProjX >= enemyTest.x - enemyTest.width &&
-    ProjX + ProjW <= enemyTest.x + enemyTest.width
+    projRect.top <= enemyRect.bottom &&
+    projRect.bottom >= enemyRect.top &&
+    projRect.left <= enemyRect.right &&
+    projRect.right >= enemyRect.left
   ) {
     boumEnemy.play();
-    //// enemy.remove();
-    enemyTest.remove();
-    return 1;
+    enemy.remove();
+    return true;
   }
+  return false;
 }
 
-/////////////////////////////////////////////ACTIONS  
+//////////////////////////////////////////////////////////////////////////////////////////ACTIONS
 function goLeft() {
   let Xpos = getXpos();
   const { left: MAX_LEFT } = getScreenBounds();
@@ -94,37 +111,35 @@ function ShootUp() {
   projectile.classList.add("projectile");
   screen.appendChild(projectile);
   projectile.style.left = You.style.left;
-  projectile.style.bottom = "60px";
+  projectile.style.bottom = "0px";
+  projectile.style.marginBottomgin= You.style.bottom;
   pioupiou.play();
 
   function moveProjectile() {
     let currentBottom = parseInt(projectile.style.bottom);
     projectile.style.bottom = currentBottom + 10 + "px";
 
-    //colision all enemies
+    const projRect = projectile.getBoundingClientRect();
 
-    // enemies.forEach((enemy) => {
-    //   deathEnemy(enemy,projectile.x,projectile.y,projectile.width);
-    // });
-    if(deathEnemy(enemyTest,projectile.x,projectile.y,projectile.width)){
-      projectile.remove();
-    }
-    
+    enemies.forEach((enemy, index) => {
+      if (deathEnemy(enemy, projRect)) {
+        enemies.splice(index, 1);
+        projectile.remove();
+        return;
+      }
+    });
 
-    //out of screen
-    if (currentBottom < 800) {
+    if (currentBottom < screen.offsetHeight) {
       requestAnimationFrame(moveProjectile);
     } else {
       projectile.remove();
     }
   }
 
-  // Lancer le déplacement du projectile
   requestAnimationFrame(moveProjectile);
 }
 
-
-//////////////////////////////////////////CONTROLS
+//////////////////////////////////////////////////////////////////////////////////////////CONTROLS
 //Fluidity
 var keys = {};
 
@@ -141,11 +156,14 @@ function Controls() {
     const currentTime = Date.now();
     const timeSinceLastShot = currentTime - lastShotTime;
 
+    // ver normale
+
     // if (timeSinceLastShot > 500) { //latence
     //   ShootUp();
     //   lastShotTime = currentTime;
     // }
-    ShootUp(); //A SUP
+    
+    ShootUp(); //A SUP TIR RAFALE
   }
   if (keys["ArrowLeft"]) {
     goLeft();
@@ -154,8 +172,6 @@ function Controls() {
     goRight();
   }
 
-  requestAnimationFrame(Controls); //?
+  requestAnimationFrame(Controls);
 }
 Controls();
-
-//DEATH

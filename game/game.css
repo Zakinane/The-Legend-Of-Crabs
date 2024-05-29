@@ -118,11 +118,12 @@ a:hover {
   width: 50px;
   top: -500px;
   margin-top: 50px;
-  animation: dedecollage 1s 4s ease-in forwards;
+  
 }
 .enemyTest{
   left: 50%;
-  transform: translateX(-50%);/*temp*/
+  transform: translateX(-50%);
+  animation: dedecollage 1s 4s ease-in forwards;
 }
 @keyframes dedecollage {
   0% {
@@ -137,6 +138,4 @@ a:hover {
   position: absolute;
   height: 20px;
   z-index: 102;
-  bottom: 0px;
-  margin-bottom: 150px;
 }
