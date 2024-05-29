@@ -36,7 +36,7 @@ function getXpos() {
   return You.getBoundingClientRect().left;
 }
 //money
-You.addEventListener("click", function () {
+You.addEventListener("mouseover", function () {
   var audioMoney = document.querySelector(".moneyAudio");
   audioMoney.play();
 });
@@ -179,3 +179,25 @@ function Controls() {
 setTimeout(() => {
   Controls();
 }, 4000); //Crabs monte
+
+if ('ontouchstart' in window) {
+  let touchX;
+
+  document.addEventListener('touchstart', function (e) {
+    touchX = e.touches[0].clientX;
+  });
+
+  document.addEventListener('touchmove', function (e) {
+    const newX = e.touches[0].clientX;
+    if (newX < touchX) {
+      goLeft();
+    } else if (newX > touchX) {
+      goRight();
+    }
+    touchX = newX;
+  });
+
+  document.addEventListener('touchend', function (e) {
+    ShootUp();
+  });
+}

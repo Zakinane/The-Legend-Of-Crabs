@@ -21,41 +21,126 @@ a {
 a:hover {
   cursor: url("../img/cursor/cursorHover.png"), auto;
 }
+.screen {
+  background-color: #051630;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../img/title.png");
+  height: 100%;
+  position: relative;
+  animation: going-down 3s ease-in forwards;
+}
+
+@keyframes going-down {
+  0% {
+    top: 0px;
+  }
+  100% {
+    top: 400px;
+  }
+}
+
+.SoundButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 80px;
+  cursor: url("../img/cursor/cursorHover.png"), auto;
+}
+
 /*Mobile*/
-@media screen and (min-width: 320px) {
+@media screen and (max-width: 768px) {
+  .SoundButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 40px;
+  }
+  .Coded-by{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 40px;
+  }
+  .moneyAudio{
+    display: none;
+  }
+  .credits {
+    display: none;
+  }
+  .controls {
+    display: none;
+  }
+  .controlsPic {
+   display: none;
+  }
+  .controlsPicture {
+    display: none;
+  }
+  .container {
+    width: 100vw;
+    height: 100vh;
+  }
+  h5{
+    display: none;
+  }
+  H2{
+    display: none;
+  }
+  .You {
+    width: 20px;
+  }
+  .enemy {
+    width: 15px;
+  }
+  .projectile {
+    height: 7px;
+  }
 }
 
 /*Tablette*/
-@media screen and (min-width: 768px) {
-}
-
-/*PC*/
-@media screen and (min-width: 1200px) {
+@media screen and (max-width: 1024px) {
+  .credits {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .controls {
+    color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .controlsPic {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    color: white;
+  }
+  .controlsPicture {
+    height: 30px;
+  }
   .container {
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 1.5fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
   }
-  .screen {
-    background-color: #051630;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url("../img/title.png");
-    height: 100%;
-    position: relative; /* Ensure top positioning works */
-    animation: going-down 3s ease-in forwards;
+  .You {
+    width: 60px;
   }
+  .enemy {
+    width: 45px;
+  }
+  .projectile {
+    height: 18px;
+  }
+}
 
-  @keyframes going-down {
-    0% {
-      top: 0px;
-    }
-    100% {
-      top: 400px;
-    }
-  }
-
+/*PC*/
+@media screen and (min-width: 1024px) {
   .credits {
     color: white;
     display: flex;
@@ -78,19 +163,13 @@ a:hover {
   .controlsPicture {
     height: 60px;
   }
-  .SoundButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    height: 80px;
-    cursor: url("../img/cursor/cursorHover.png"), auto;
+  .container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
   }
-  .ReplayIntro {
-    position: absolute;
-    top: 100px;
-    right: 10px;
-    cursor: url("../img/cursor/cursorHover.png"), auto;
-  }
+ 
 }
 
 .You {
@@ -120,20 +199,6 @@ a:hover {
   margin-top: 50px;
   
 }
-.enemyTest{
-  left: 50%;
-  transform: translateX(-50%);
-  animation: dedecollage 1s 4s ease-in forwards;
-}
-@keyframes dedecollage {
-  0% {
-    top: -500px;
-  }
-  100% {
-    top: 0px;
-  }
-}
-
 .projectile{
   position: absolute;
   height: 20px;
