@@ -51,8 +51,8 @@ function createEnemy() {
   enemy.src = "../img/plankton.png";
 
   const { left: MAX_LEFT, right: MAX_RIGHT } = getScreenBounds();
-  const enemyWidth = 50; // Assuming enemy width is 50px
-  enemy.style.left = Math.random() * (MAX_RIGHT - MAX_LEFT - enemyWidth) + MAX_LEFT + "px";
+  enemy.style.left =
+    Math.random() * (MAX_RIGHT - MAX_LEFT - 50) + MAX_LEFT + "px";
   enemy.style.top = "-200px";
   enemies.push(enemy);
   screen.appendChild(enemy);
@@ -62,7 +62,7 @@ function createEnemy() {
     let currentTop = parseInt(enemy.style.top);
     enemy.style.top = currentTop + 2 + "px";
 
-    if (1) {
+    if (deathEnemy) {
       requestAnimationFrame(moveEnemy);
     } else {
       enemy.remove();
@@ -70,7 +70,7 @@ function createEnemy() {
   }
   requestAnimationFrame(moveEnemy);
 
-  setTimeout(createEnemy, 2000);
+  setTimeout(createEnemy, 2000); //Vitesse spawn enemies
 }
 setTimeout(createEnemy, 2000);
 
@@ -85,6 +85,7 @@ function deathEnemy(enemy, projRect) {
   ) {
     boumEnemy.play();
     enemy.remove();
+
     return true;
   }
   return false;
@@ -113,13 +114,12 @@ function ShootUp() {
   projectile.classList.add("projectile");
   screen.appendChild(projectile);
   projectile.style.left = You.style.left;
-  projectile.style.bottom = "0px";
-  projectile.style.marginBottomgin= You.style.bottom;
+  projectile.style.bottom = "50px";
   pioupiou.play();
 
   function moveProjectile() {
     let currentBottom = parseInt(projectile.style.bottom);
-    projectile.style.bottom = currentBottom + 10 + "px";
+    projectile.style.bottom = currentBottom + 10 + "px"; //vitesse projectiles
 
     const projRect = projectile.getBoundingClientRect();
 
@@ -137,7 +137,6 @@ function ShootUp() {
       projectile.remove();
     }
   }
-
   requestAnimationFrame(moveProjectile);
 }
 
@@ -159,13 +158,14 @@ function Controls() {
     const timeSinceLastShot = currentTime - lastShotTime;
 
     // ver normale
-    if (timeSinceLastShot > 500) { //latence
+    if (timeSinceLastShot > 500) {
+      //latence
       ShootUp();
       lastShotTime = currentTime;
     }
 
     //TIR RAFALE
-    //ShootUp(); 
+    //ShootUp();
   }
   if (keys["ArrowLeft"]) {
     goLeft();
@@ -176,4 +176,6 @@ function Controls() {
 
   requestAnimationFrame(Controls);
 }
-Controls();
+setTimeout(() => {
+  Controls();
+}, 4000); //Crabs monte
