@@ -74,6 +74,31 @@ function createEnemy() {
 }
 setTimeout(createEnemy, 2000);
 
+function animateEnemyDeath(enemy) {
+  const explosionFrames = [
+    "../img/Exlosion/1.png",
+    "../img/Exlosion/2.png",
+    "../img/Exlosion/3.png",
+    "../img/Exlosion/4.png",
+    "../img/Exlosion/5.png",
+    "../img/Exlosion/6.png",
+    "../img/Exlosion/7.png",
+    "../img/Exlosion/8.png",
+  ];
+  let frameIndex = 0;
+
+function changeFrame() {//ajout fonction pour set timout
+  if (frameIndex < explosionFrames.length) {
+    enemy.src = explosionFrames[frameIndex];
+    frameIndex++;
+    setTimeout(changeFrame, 100);
+  } else {
+    enemy.remove();
+  }
+}
+changeFrame();
+}
+
 function deathEnemy(enemy, projRect) {
   const enemyRect = enemy.getBoundingClientRect();
 
@@ -84,7 +109,7 @@ function deathEnemy(enemy, projRect) {
     projRect.right >= enemyRect.left
   ) {
     boumEnemy.play();
-    enemy.remove();
+    animateEnemyDeath(enemy);
 
     return true;
   }
@@ -165,7 +190,7 @@ function Controls() {
     }
 
     //TIR RAFALE
-    //ShootUp();
+    // ShootUp();
   }
   if (keys["ArrowLeft"]) {
     goLeft();
