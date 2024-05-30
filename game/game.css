@@ -56,23 +56,29 @@ a:hover {
     right: 10px;
     height: 40px;
   }
-  .Coded-by{
+  .Coded-by {
     position: absolute;
     top: 10px;
     left: 10px;
     height: 40px;
   }
-  .moneyAudio{
+  .moneyAudio {
     display: none;
   }
   .credits {
     display: none;
   }
+  .HS {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
+  }
   .controls {
     display: none;
   }
   .controlsPic {
-   display: none;
+    display: none;
   }
   .controlsPicture {
     display: none;
@@ -82,10 +88,10 @@ a:hover {
     height: 100vh;
     /*???*/
   }
-  h5{
+  h5 {
     display: none;
   }
-  H2{
+  H2 {
     display: none;
   }
   .You {
@@ -101,11 +107,23 @@ a:hover {
 
 /*Tablette*/
 @media screen and (max-width: 1024px) {
+  .HS {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
+  }
+  .score {
+    color: rgb(255, 67, 67);
+    font-family: fantasy;
+    font-weight: lighter;
+  }
   .credits {
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
   }
   .controls {
     color: green;
@@ -147,6 +165,18 @@ a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+  }
+  .HS {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
+  }
+  .score {
+    color: rgb(255, 67, 67);
+    font-family: fantasy;
+    font-weight: lighter;
   }
   .controls {
     color: green;
@@ -154,6 +184,9 @@ a:hover {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+  }
+  h5 {
+    font-weight: lighter;
   }
   .controlsPic {
     display: flex;
@@ -170,7 +203,6 @@ a:hover {
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr;
   }
- 
 }
 
 .You {
@@ -192,15 +224,14 @@ a:hover {
     bottom: 0px;
   }
 }
-.enemy{
+.enemy {
   position: absolute;
   z-index: 103;
   width: 50px;
   top: -500px;
   margin-top: 50px;
-  
 }
-.projectile{
+.projectile {
   position: absolute;
   height: 20px;
   z-index: 102;

@@ -92,25 +92,10 @@ a:hover {
   .credits {
     display: none;
   }
-  .controls {
-    display: none;
-  }
-  .controlsPic {
-   display: none;
-  }
-  .controlsPicture {
-    display: none;
-  }
   .container {
     width: 100vw;
     height: 100vh;
     /*???*/
-  }
-  h5{
-    display: none;
-  }
-  H2{
-    display: none;
   }
 .title{
   width: 200px;
@@ -127,22 +112,6 @@ a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  .controls {
-    color: green;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-  .controlsPic {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    color: white;
-  }
-  .controlsPicture {
-    height: 30px;
   }
   .container {
     width: 100vw;
@@ -196,22 +165,6 @@ a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  .controls {
-    color: green;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-  .controlsPic {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    color: white;
-  }
-  .controlsPicture {
-    height: 60px;
   }
   .SoundButton {
     position: absolute;

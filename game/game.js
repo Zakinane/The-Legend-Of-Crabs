@@ -5,6 +5,27 @@ function getScreenBounds() {
   return { left: rect.left, right: rect.right };
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////SCORE
+const scoreElement = document.querySelector(".score");
+//class 
+class ScoreManager { 
+  constructor(scoreElement) {
+    this.scoreElement = scoreElement;
+    this.currentScore = 0;
+    this.updateScoreElem();
+  }
+  updateScore(pts) {
+    this.currentScore += pts;
+    if(this.currentScore>=999999999) this.currentScore = 999999999;
+    this.updateScoreElem();
+  }
+  updateScoreElem() {
+    this.scoreElement.textContent = this.currentScore;
+  }
+}
+
+const scoreManager = new ScoreManager(scoreElement);
+
 ////////////////////////////////////////////////////////////////////////////////////////////AUDIO
 //ost
 document.addEventListener("DOMContentLoaded", function () {
@@ -87,16 +108,17 @@ function animateEnemyDeath(enemy) {
   ];
   let frameIndex = 0;
 
-function changeFrame() {//ajout fonction pour set timout
-  if (frameIndex < explosionFrames.length) {
-    enemy.src = explosionFrames[frameIndex];
-    frameIndex++;
-    setTimeout(changeFrame, 100);
-  } else {
-    enemy.remove();
+  function changeFrame() {
+    //ajout fonction pour set timout
+    if (frameIndex < explosionFrames.length) {
+      enemy.src = explosionFrames[frameIndex];
+      frameIndex++;
+      setTimeout(changeFrame, 100);
+    } else {
+      enemy.remove();
+    }
   }
-}
-changeFrame();
+  changeFrame();
 }
 
 function deathEnemy(enemy, projRect) {
@@ -109,8 +131,8 @@ function deathEnemy(enemy, projRect) {
     projRect.right >= enemyRect.left
   ) {
     boumEnemy.play();
+    scoreManager.updateScore(500);
     animateEnemyDeath(enemy);
-
     return true;
   }
   return false;
@@ -205,14 +227,14 @@ setTimeout(() => {
   Controls();
 }, 4000); //Crabs monte
 
-if ('ontouchstart' in window) {
+if ("ontouchstart" in window) {
   let touchX;
 
-  document.addEventListener('touchstart', function (e) {
+  document.addEventListener("touchstart", function (e) {
     touchX = e.touches[0].clientX;
   });
 
-  document.addEventListener('touchmove', function (e) {
+  document.addEventListener("touchmove", function (e) {
     const newX = e.touches[0].clientX;
     if (newX < touchX) {
       goLeft();
@@ -222,7 +244,7 @@ if ('ontouchstart' in window) {
     touchX = newX;
   });
 
-  document.addEventListener('touchend', function (e) {
+  document.addEventListener("touchend", function (e) {
     ShootUp();
   });
 }
