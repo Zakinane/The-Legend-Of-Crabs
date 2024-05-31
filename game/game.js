@@ -278,6 +278,12 @@ if ("ontouchstart" in window) {
   });
 
   document.addEventListener("touchend", function (e) {
-    ShootUp();
+    const currentTime = Date.now();
+    const timeSinceLastShot = currentTime - lastShotTime;
+    if (timeSinceLastShot > 500) {
+      //latence
+      ShootUp();
+      lastShotTime = currentTime;
+    }
   });
 }
