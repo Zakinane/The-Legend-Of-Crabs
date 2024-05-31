@@ -29,6 +29,9 @@ a:hover {
   height: 100%;
   position: relative;
   animation: going-down 3s ease-in forwards;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 @keyframes going-down {
@@ -47,7 +50,7 @@ a:hover {
   height: 80px;
   cursor: url("../img/cursor/cursorHover.png"), auto;
 }
-.high-score{
+.high-score {
   color: red;
 }
 
