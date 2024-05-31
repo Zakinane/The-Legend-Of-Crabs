@@ -5,57 +5,6 @@ function getScreenBounds() {
   return { left: rect.left, right: rect.right };
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////SCORE
-const scoreElement = document.querySelector(".score");
-const highScoreElement = document.querySelector(".high-score");
-
-class ScoreManager {
-  constructor(scoreElement, highScoreElement) {
-    this.scoreElement = scoreElement;
-    this.highScoreElement = highScoreElement;
-    this.currentScore = 0;
-    this.highScore = this.highScoreElement.textContent;
-    this.updateScoreElem();
-    this.updateHighScoreElem();
-  }
-  updateScore(pts) {
-    this.currentScore += pts;
-    if (this.currentScore > 999999999) this.currentScore = 999999999;
-    this.updateScoreElem();
-    this.checkAndUpdateHighScore();
-  }
-  updateScoreElem() {
-    this.scoreElement.textContent = this.currentScore;
-  }
-  updateHighScoreElem() {
-    this.highScoreElement.textContent = this.highScore;
-  }
-  checkAndUpdateHighScore() {
-    if (this.currentScore > this.highScore) {
-      this.highScore = this.currentScore;
-      this.updateHighScoreElem();
-    }
-  }
-}
-
-const scoreManager = new ScoreManager(scoreElement, highScoreElement);
-
-///////////////////////////////////////////////////////////////////////////////////////////SCORE-DATA
-
-function saveData(highScore) {
-  localStorage.setItem("game", highScore);
-}
-
-function updateAndSaveData() {
-  const highScore = highScoreElement.textContent;
-  saveData(highScore);
-}
-
-const savedData = localStorage.getItem("game");
-if (savedData) {
-  highScore.textContent = savedData;
-}
-
 ////////////////////////////////////////////////////////////////////////////////////////////AUDIO
 //ost
 document.addEventListener("DOMContentLoaded", function () {
@@ -79,6 +28,58 @@ document.addEventListener("DOMContentLoaded", function () {
 //others
 const pioupiou = document.querySelector(".pioupiou");
 const boumEnemy = document.querySelector(".boumEnemy");
+
+///////////////////////////////////////////////////////////////////////////////////////////SCORE-DATA
+function saveData(highScore) {
+  localStorage.setItem("game", highScore);
+}
+
+function updateAndSaveData() {
+  const highScore = highScoreElement.textContent;
+  saveData(highScore);
+}
+
+const savedData = localStorage.getItem("game");
+
+////////////////////////////////////////////////////////////////////////////////////////////SCORE
+const scoreElement = document.querySelector(".score");
+const highScoreElement = document.querySelector(".high-score");
+
+class ScoreManager {
+  constructor(scoreElement, highScoreElement) {
+    this.scoreElement = scoreElement;
+    this.highScoreElement = highScoreElement;
+    this.currentScore = 0;
+    if (savedData) {
+      this.highScore = savedData;
+    } else{
+      this.highScore = this.highScoreElement.textContent;
+    }
+    this.updateScoreElem();
+    this.updateHighScoreElem();
+  }
+  updateScore(pts) {
+    this.currentScore += pts;
+    if (this.currentScore > 999999999) this.currentScore = 999999999;
+    this.updateScoreElem();
+    this.checkAndUpdateHighScore();
+    updateAndSaveData();
+  }
+  updateScoreElem() {
+    this.scoreElement.textContent = this.currentScore;
+  }
+  updateHighScoreElem() {
+    this.highScoreElement.textContent = this.highScore;
+  }
+  checkAndUpdateHighScore() {
+    if (this.currentScore > this.highScore) {
+      this.highScore = this.currentScore;
+      this.updateHighScoreElem();
+    }
+  }
+}
+
+const scoreManager = new ScoreManager(scoreElement, highScoreElement);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////ME
 const You = document.querySelector(".You");
