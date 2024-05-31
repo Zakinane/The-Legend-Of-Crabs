@@ -47,6 +47,9 @@ a:hover {
   height: 80px;
   cursor: url("../img/cursor/cursorHover.png"), auto;
 }
+.high-score{
+  color: red;
+}
 
 /*Mobile*/
 @media screen and (max-width: 768px) {

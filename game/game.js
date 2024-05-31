@@ -7,24 +7,54 @@ function getScreenBounds() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////SCORE
 const scoreElement = document.querySelector(".score");
-//class 
-class ScoreManager { 
-  constructor(scoreElement) {
+const highScoreElement = document.querySelector(".high-score");
+
+class ScoreManager {
+  constructor(scoreElement, highScoreElement) {
     this.scoreElement = scoreElement;
+    this.highScoreElement = highScoreElement;
     this.currentScore = 0;
+    this.highScore = this.highScoreElement.textContent;
     this.updateScoreElem();
+    this.updateHighScoreElem();
   }
   updateScore(pts) {
     this.currentScore += pts;
-    if(this.currentScore>=999999999) this.currentScore = 999999999;
+    if (this.currentScore > 999999999) this.currentScore = 999999999;
     this.updateScoreElem();
+    this.checkAndUpdateHighScore();
   }
   updateScoreElem() {
     this.scoreElement.textContent = this.currentScore;
   }
+  updateHighScoreElem() {
+    this.highScoreElement.textContent = this.highScore;
+  }
+  checkAndUpdateHighScore() {
+    if (this.currentScore > this.highScore) {
+      this.highScore = this.currentScore;
+      this.updateHighScoreElem();
+    }
+  }
 }
 
-const scoreManager = new ScoreManager(scoreElement);
+const scoreManager = new ScoreManager(scoreElement, highScoreElement);
+
+///////////////////////////////////////////////////////////////////////////////////////////SCORE-DATA
+
+function saveData(highScore) {
+  localStorage.setItem("game", highScore);
+}
+
+function updateAndSaveData() {
+  const highScore = highScoreElement.textContent;
+  saveData(highScore);
+}
+
+const savedData = localStorage.getItem("game");
+if (savedData) {
+  highScore.textContent = savedData;
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////AUDIO
 //ost
@@ -109,7 +139,7 @@ function animateEnemyDeath(enemy) {
   let frameIndex = 0;
 
   function changeFrame() {
-    //ajout fonction pour set timout
+    //is a func pour set timout
     if (frameIndex < explosionFrames.length) {
       enemy.src = explosionFrames[frameIndex];
       frameIndex++;
@@ -131,7 +161,7 @@ function deathEnemy(enemy, projRect) {
     projRect.right >= enemyRect.left
   ) {
     boumEnemy.play();
-    scoreManager.updateScore(500);
+    scoreManager.updateScore(100);
     animateEnemyDeath(enemy);
     return true;
   }
@@ -163,6 +193,8 @@ function ShootUp() {
   projectile.style.left = You.style.left;
   projectile.style.bottom = "50px";
   pioupiou.play();
+
+  ////////////////////////////////////////////////////////////PROJECTILES
 
   function moveProjectile() {
     let currentBottom = parseInt(projectile.style.bottom);
@@ -225,7 +257,7 @@ function Controls() {
 }
 setTimeout(() => {
   Controls();
-}, 4000); //Crabs monte
+}, 4000); //Crabs monte apres X ms
 
 if ("ontouchstart" in window) {
   let touchX;
