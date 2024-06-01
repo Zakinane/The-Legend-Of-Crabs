@@ -21,6 +21,10 @@ a {
 a:hover {
   cursor: url("img/cursor/cursorHover.png"), auto;
 }
+.high-score {
+  font-size: 30px;
+  color: red;
+}
 .Start {
   padding: 10px;
   z-index: 101;
@@ -92,6 +96,12 @@ a:hover {
   .credits {
     display: none;
   }
+  .HS {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
+  }
   .container {
     width: 100vw;
     height: 100vh;
@@ -112,6 +122,13 @@ a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+  }
+  .HS {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
   }
   .container {
     width: 100vw;
@@ -165,6 +182,13 @@ a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+  }
+  .HS {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
   }
   .SoundButton {
     position: absolute;
