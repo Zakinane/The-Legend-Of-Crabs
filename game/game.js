@@ -7,9 +7,9 @@ function getScreenBounds() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////AUDIO
 //ost
+const audio = document.querySelector(".audio");
 document.addEventListener("DOMContentLoaded", function () {
   var BoutonAudio = document.querySelector(".SoundButton");
-  var audio = document.querySelector(".audio");
 
   BoutonAudio.addEventListener("click", function () {
     if (audio.paused) {
@@ -28,8 +28,11 @@ document.addEventListener("DOMContentLoaded", function () {
 //others
 const pioupiou = document.querySelector(".pioupiou");
 const boumEnemy = document.querySelector(".boumEnemy");
+const gameover = document.querySelector(".gameover");
 
-///////////////////////////////////////////////////////////////////////////////////////////SCORE-DATA
+let gameOverSoundPlayed = false;
+
+///////////////////////////////////////////////////////////////////////////////////////////SCORE DATA
 function saveData(highScore) {
   localStorage.setItem("game", highScore);
 }
@@ -52,7 +55,7 @@ class ScoreManager {
     this.currentScore = 0;
     if (savedData) {
       this.highScore = savedData;
-    } else{
+    } else {
       this.highScore = this.highScoreElement.textContent;
     }
     this.updateScoreElem();
@@ -128,14 +131,14 @@ setTimeout(createEnemy, 2000);
 
 function animateEnemyDeath(enemy) {
   const explosionFrames = [
-    "../img/Exlosion/1.png",
-    "../img/Exlosion/2.png",
-    "../img/Exlosion/3.png",
-    "../img/Exlosion/4.png",
-    "../img/Exlosion/5.png",
-    "../img/Exlosion/6.png",
-    "../img/Exlosion/7.png",
-    "../img/Exlosion/8.png",
+    "../img/Explosion/1.png",
+    "../img/Explosion/2.png",
+    "../img/Explosion/3.png",
+    "../img/Explosion/4.png",
+    "../img/Explosion/5.png",
+    "../img/Explosion/6.png",
+    "../img/Explosion/7.png",
+    "../img/Explosion/8.png",
   ];
   let frameIndex = 0;
 
@@ -222,6 +225,7 @@ function ShootUp() {
 
 //////////////////////////////////////////////////////////////////////////////////////////CONTROLS
 //Fluidity
+let controlsAnimationFrame;
 var keys = {};
 
 document.addEventListener("keydown", (key) => {
@@ -255,10 +259,13 @@ function Controls() {
   }
 
   requestAnimationFrame(Controls);
+  checkCollisions();
 }
 setTimeout(() => {
   Controls();
 }, 4000); //Crabs monte apres X ms
+
+/////////////////////////////////////////MOBILE
 
 if ("ontouchstart" in window) {
   let touchX;
@@ -287,3 +294,86 @@ if ("ontouchstart" in window) {
     }
   });
 }
+
+//////////////////////////////////////////////////////////////////////////////////GAME OVER
+
+function animateDeath(You) {
+  const explosionFrames = [
+    "../img/Explosion/1.png",
+    "../img/Explosion/2.png",
+    "../img/Explosion/3.png",
+    "../img/Explosion/4.png",
+    "../img/Explosion/5.png",
+    "../img/Explosion/8.png",
+    "../img/Explosion/6.png",
+    "../img/Explosion/7.png",
+  ];
+  let frameIndex = 0;
+
+  function changeFrame() {
+    if (frameIndex < explosionFrames.length) {
+      You.src = explosionFrames[frameIndex];
+      frameIndex++;
+      setTimeout(changeFrame, 100);
+    } else {
+      You.remove();
+      GameOverScreen();
+    }
+  }
+  changeFrame();
+}
+
+function GameOverScreen() {
+  setTimeout(() => {
+    window.location.replace("../gameover/gameover.html");
+  }, 3000);
+}
+
+function death(enemy, You) {
+  const enemyRect = enemy.getBoundingClientRect();
+  const YouRect = You.getBoundingClientRect();
+  if (
+    YouRect.top <= enemyRect.bottom &&
+    YouRect.bottom >= enemyRect.top &&
+    YouRect.left <= enemyRect.right &&
+    YouRect.right >= enemyRect.left
+  ) {
+    return true;
+  }
+  return false;
+}
+
+function checkCollisions() {
+  enemies.forEach((enemy) => {
+    if (death(enemy, You)) {
+      function playGameOverSound() {
+        if (!gameOverSoundPlayed) {
+          gameover.play();
+          gameOverSoundPlayed = true;
+        }
+      }
+      playGameOverSound();
+      audio.pause();
+      animateDeath(You);
+      stopGame();
+    }
+  });
+}
+
+function stopGame() {
+  enemies.forEach((enemy) => enemy.remove());
+  document.removeEventListener("keydown", handleKeyDown);
+  document.removeEventListener("keyup", handleKeyUp);
+  cancelAnimationFrame(controlsAnimationFrame);
+}
+function handleKeyDown(key) {
+  keys[key.code] = true;
+}
+function handleKeyUp(key) {
+  keys[key.code] = false;
+}
+
+document.addEventListener("keydown", handleKeyDown);
+document.addEventListener("keyup", handleKeyUp);
+
+////////////////////////////////////////////////////////////////////////////////////// :D
