@@ -2,7 +2,11 @@
 const savedData = localStorage.getItem("game");
 const highScoreElement = document.querySelector(".high-score");
 
-highScoreElement.textContent = localStorage.getItem("game");
+if(savedData){
+  highScoreElement.textContent = localStorage.getItem("game");
+} else{
+  highScoreElement.textContent = 0;
+}
 
 //Intro AUDIO
 document.addEventListener("DOMContentLoaded", function () {
