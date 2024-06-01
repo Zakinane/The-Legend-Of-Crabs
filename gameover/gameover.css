@@ -1,0 +1,183 @@
+@font-face {
+  font-family: "Kraby Patty";
+  src: url(../assets/Krabby\ Patty.ttf);
+}
+* {
+  margin: 0px;
+}
+main {
+  background-color: #051630;
+}
+html {
+  font-family: "Kraby Patty";
+  background-color: rgb(48, 48, 48);
+  cursor: none;
+  overflow: hidden;
+  cursor: url("../img/cursor/cursorPtr.png"), auto;
+}
+a {
+  color: green;
+}
+a:hover {
+  cursor: url("../img/cursor/cursorHover.png"), auto;
+}
+.high-score {
+  font-size: 30px;
+  color: red;
+}
+.gameover {
+  color: red;
+  font-size: 50px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+.choices {
+  position: fixed;
+  top: 58%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+.choice {
+  text-decoration: none;
+  color: black;
+  width: 125px;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  border: solid rgb(132, 132, 132) 3px;
+}
+
+/*Mobile*/
+@media screen and (max-width: 768px) {
+  .Coded-by {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 40px;
+  }
+  .credits {
+    display: none;
+  }
+  .HS {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
+  }
+  .controls {
+    display: none;
+  }
+  .controlsPic {
+    display: none;
+  }
+  .controlsPicture {
+    display: none;
+  }
+  .container {
+    width: 100vw;
+    height: 100vh;
+    /*???*/
+  }
+  h5 {
+    display: none;
+  }
+  H2 {
+    display: none;
+  }
+}
+
+/*Tablette*/
+@media screen and (max-width: 1024px) {
+  .HS {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
+  }
+  .score {
+    color: rgb(255, 67, 67);
+    font-family: fantasy;
+    font-weight: lighter;
+  }
+  .credits {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .controls {
+    color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .controlsPic {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    color: white;
+  }
+  .controlsPicture {
+    height: 30px;
+  }
+  .container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+}
+
+/*PC*/
+@media screen and (min-width: 1024px) {
+  .credits {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .HS {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
+  }
+  .score {
+    color: rgb(255, 67, 67);
+    font-family: fantasy;
+    font-weight: lighter;
+  }
+  .controls {
+    color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  h5 {
+    font-weight: lighter;
+  }
+  .controlsPic {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    color: white;
+  }
+  .controlsPicture {
+    height: 60px;
+  }
+  .container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+  }
+}
