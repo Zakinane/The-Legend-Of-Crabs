@@ -1,8 +1,15 @@
 ///////////////////////////////////////////////////////////////////////////////////////////SCREEN
 const screen = document.querySelector("main");
+const krustyKrab = document.querySelector(".screen");
+
 function getScreenBounds() {
   const rect = screen.getBoundingClientRect();
   return { left: rect.left, right: rect.right };
+}
+
+function animateScreen() {
+  krustyKrab.style.backgroundImage  = "url('../img/badending.png')";
+  krustyKrab.classList.add("going-up");
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////AUDIO
@@ -67,6 +74,7 @@ class ScoreManager {
     this.updateScoreElem();
     this.checkAndUpdateHighScore();
     updateAndSaveData();
+    adjustDifficulty(this.currentScore); // Adjust difficulty based on score
   }
   updateScoreElem() {
     this.scoreElement.textContent = this.currentScore;
@@ -99,11 +107,21 @@ You.addEventListener("mouseover", function () {
 //////////////////////////////////////////////////////////////////////////////////////////////ENEMY
 
 const enemies = [];
+let enemySpeed = 2; // Initial enemy speed
+let spawnInterval = 2000;
+let burstFireActive = false;
 
 function createEnemy() {
   const enemy = document.createElement("img");
   enemy.classList.add("enemy");
   enemy.src = "../img/plankton.png";
+
+  // Chance power-up
+  const powerUpChance = Math.random() * 20;
+  if (powerUpChance < 1) {
+    enemy.src = "../img/powerup.png";
+    enemy.classList.add("power-up");
+  }
 
   const { left: MAX_LEFT, right: MAX_RIGHT } = getScreenBounds();
   enemy.style.left =
@@ -113,21 +131,29 @@ function createEnemy() {
   screen.appendChild(enemy);
 
   // Move enemy downward
-  function moveEnemy() {
-    let currentTop = parseInt(enemy.style.top);
-    enemy.style.top = currentTop + 2 + "px";
+  requestAnimationFrame(() => moveEnemy(enemy));
 
-    if (deathEnemy) {
-      requestAnimationFrame(moveEnemy);
-    } else {
-      enemy.remove();
-    }
-  }
-  requestAnimationFrame(moveEnemy);
-
-  setTimeout(createEnemy, 2000); //Vitesse spawn enemies
+  setTimeout(createEnemy, spawnInterval); // Vitesse spawn enemies
 }
-setTimeout(createEnemy, 2000);
+setTimeout(createEnemy, spawnInterval);
+
+function moveEnemy(enemy) {
+  let currentTop = parseInt(enemy.style.top);
+  enemy.style.top = currentTop + enemySpeed + "px";
+
+  if (currentTop >= screen.offsetHeight) {
+    if (enemy.classList.contains("power-up")) {
+      enemy.remove();
+      const index = enemies.indexOf(enemy);
+      if (index > -1) enemies.splice(index, 1);
+    } else if (!enemy.getAttribute("data-dead")) {
+      animateScreen();
+      gameOver();
+    }
+  } else {
+    requestAnimationFrame(() => moveEnemy(enemy));
+  }
+}
 
 function animateEnemyDeath(enemy) {
   const explosionFrames = [
@@ -141,15 +167,17 @@ function animateEnemyDeath(enemy) {
     "../img/Explosion/8.png",
   ];
   let frameIndex = 0;
+  enemy.setAttribute("data-dead", "true");
 
   function changeFrame() {
-    //is a func pour set timout
     if (frameIndex < explosionFrames.length) {
       enemy.src = explosionFrames[frameIndex];
       frameIndex++;
       setTimeout(changeFrame, 100);
     } else {
       enemy.remove();
+      const index = enemies.indexOf(enemy);
+      if (index > -1) enemies.splice(index, 1);
     }
   }
   changeFrame();
@@ -164,9 +192,13 @@ function deathEnemy(enemy, projRect) {
     projRect.left <= enemyRect.right &&
     projRect.right >= enemyRect.left
   ) {
-    boumEnemy.play();
-    scoreManager.updateScore(100);
-    animateEnemyDeath(enemy);
+    if (enemy.classList.contains("power-up")) {
+      activateBurstFire();
+    } else {
+      boumEnemy.play();
+      scoreManager.updateScore(100);
+      animateEnemyDeath(enemy);
+    }
     return true;
   }
   return false;
@@ -202,7 +234,7 @@ function ShootUp() {
 
   function moveProjectile() {
     let currentBottom = parseInt(projectile.style.bottom);
-    projectile.style.bottom = currentBottom + 10 + "px"; //vitesse projectiles
+    projectile.style.bottom = currentBottom + 10 + "px"; // vitesse projectiles
 
     const projRect = projectile.getBoundingClientRect();
 
@@ -224,7 +256,7 @@ function ShootUp() {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////CONTROLS
-//Fluidity
+// Fluidity
 let controlsAnimationFrame;
 var keys = {};
 
@@ -242,14 +274,10 @@ function Controls() {
     const timeSinceLastShot = currentTime - lastShotTime;
 
     // ver normale
-    if (timeSinceLastShot > 500) {
-      //latence
+    if (timeSinceLastShot > (burstFireActive ? 100 : 500)) {
       ShootUp();
       lastShotTime = currentTime;
     }
-
-    //TIR RAFALE
-    // ShootUp();
   }
   if (keys["ArrowLeft"]) {
     goLeft();
@@ -263,7 +291,7 @@ function Controls() {
 }
 setTimeout(() => {
   Controls();
-}, 4000); //Crabs monte apres X ms
+}, 4000); // Crabs monte apres X ms
 
 /////////////////////////////////////////MOBILE
 
@@ -287,8 +315,7 @@ if ("ontouchstart" in window) {
   document.addEventListener("touchend", function (e) {
     const currentTime = Date.now();
     const timeSinceLastShot = currentTime - lastShotTime;
-    if (timeSinceLastShot > 500) {
-      //latence
+    if (timeSinceLastShot > (burstFireActive ? 100 : 500)) {
       ShootUp();
       lastShotTime = currentTime;
     }
@@ -317,18 +344,11 @@ function animateDeath(You) {
       setTimeout(changeFrame, 100);
     } else {
       You.remove();
-      GameOverScreen();
+      gameOver();
     }
   }
   changeFrame();
 }
-
-function GameOverScreen() {
-  setTimeout(() => {
-    window.location.replace("../gameover/gameover.html");
-  }, 3000);
-}
-
 function death(enemy, You) {
   const enemyRect = enemy.getBoundingClientRect();
   const YouRect = You.getBoundingClientRect();
@@ -343,19 +363,44 @@ function death(enemy, You) {
   return false;
 }
 
+function gameOver() {
+  function playGameOverSound() {
+    if (!gameOverSoundPlayed) {
+      gameover.play();
+      gameOverSoundPlayed = true;
+    }
+  }
+  playGameOverSound();
+  audio.pause();
+  animateDeath(You);
+  stopGame();
+  setTimeout(() => {
+    window.location.replace("../gameover/gameover.html");
+  }, 3000);
+}
+
+function gameOver() {
+  function playGameOverSound() {
+    if (!gameOverSoundPlayed) {
+      gameover.play();
+      gameOverSoundPlayed = true;
+    }
+  }
+  playGameOverSound();
+  audio.pause();
+  animateDeath(You);
+  stopGame();
+  setTimeout(() => {
+    window.location.replace("../gameover/gameover.html");
+  }, 6000);
+}
+
 function checkCollisions() {
   enemies.forEach((enemy) => {
-    if (death(enemy, You)) {
-      function playGameOverSound() {
-        if (!gameOverSoundPlayed) {
-          gameover.play();
-          gameOverSoundPlayed = true;
-        }
+    if (!enemy.getAttribute("data-dead")) {
+      if (death(enemy, You)) {
+        gameOver();
       }
-      playGameOverSound();
-      audio.pause();
-      animateDeath(You);
-      stopGame();
     }
   });
 }
@@ -376,4 +421,26 @@ function handleKeyUp(key) {
 document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
 
-////////////////////////////////////////////////////////////////////////////////////// :D
+//////////////////////////////////////////////////////////////////////////////////////NEW FEATURES
+
+function adjustDifficulty(score) {
+  if (score >= 1000 && score < 2000) {
+    enemySpeed = 4;
+    spawnInterval = 1500;
+  } else if (score >= 2000 && score < 4000) {
+    enemySpeed = 5;
+    spawnInterval = 1000;
+  } else if (score >= 4000) {
+    enemySpeed = 6;
+    spawnInterval = 750;
+  }
+}
+
+function activateBurstFire() {
+  burstFireActive = true;
+  setTimeout(() => {
+    burstFireActive = false;
+  }, 10000); //10s
+}
+
+/////////////////////////////////////////////////////////////////////////////////////// ;D

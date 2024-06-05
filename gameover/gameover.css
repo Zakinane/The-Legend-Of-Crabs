@@ -6,7 +6,9 @@
   margin: 0px;
 }
 main {
-  background-color: #051630;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../img/badending.png");
 }
 html {
   font-family: "Kraby Patty";

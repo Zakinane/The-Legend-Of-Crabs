@@ -42,6 +42,17 @@ a:hover {
     top: 400px;
   }
 }
+.screen.going-up {
+  animation: going-up 3s ease-in forwards;
+}
+@keyframes going-up {
+  0% {
+    top: 400px;
+  }
+  100% {
+    top: 0px;
+  }
+}
 
 .SoundButton {
   position: absolute;
@@ -209,36 +220,35 @@ a:hover {
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr;
   }
-}
-
-.You {
-  position: absolute;
-  z-index: 103;
-  width: 70px;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -1000px;
-  margin-bottom: 50px;
-  cursor: url("../img/cursor/cursorHover.png"), auto;
-  animation: decollage 1s 3s ease-in forwards;
-}
-@keyframes decollage {
-  0% {
+  .You {
+    position: absolute;
+    z-index: 103;
+    width: 70px;
+    left: 50%;
+    transform: translateX(-50%);
     bottom: -1000px;
+    margin-bottom: 50px;
+    cursor: url("../img/cursor/cursorHover.png"), auto;
+    animation: decollage 1s 3s ease-in forwards;
   }
-  100% {
-    bottom: 0px;
+  @keyframes decollage {
+    0% {
+      bottom: -1000px;
+    }
+    100% {
+      bottom: 0px;
+    }
   }
-}
-.enemy {
-  position: absolute;
-  z-index: 103;
-  width: 50px;
-  top: -500px;
-  margin-top: 50px;
-}
-.projectile {
-  position: absolute;
-  height: 20px;
-  z-index: 102;
+  .enemy {
+    position: absolute;
+    z-index: 103;
+    width: 50px;
+    top: -500px;
+    margin-top: 50px;
+  }
+  .projectile {
+    position: absolute;
+    height: 20px;
+    z-index: 102;
+  }
 }
