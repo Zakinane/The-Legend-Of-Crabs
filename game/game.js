@@ -113,8 +113,8 @@ function getXpos() {
   return You.getBoundingClientRect().left;
 }
 //money
+var audioMoney = document.querySelector(".moneyAudio");
 You.addEventListener("mouseover", function () {
-  var audioMoney = document.querySelector(".moneyAudio");
   audioMoney.play();
 });
 
@@ -123,7 +123,7 @@ You.addEventListener("mouseover", function () {
 const enemies = [];
 let enemySpeed = 2; // Initial enemy speed
 let spawnInterval = 2000;
-let burstFireActive = false;
+let PiouPiou = false;
 
 function createEnemy() {
   const enemy = document.createElement("img");
@@ -207,7 +207,7 @@ function deathEnemy(enemy, projRect) {
     projRect.right >= enemyRect.left
   ) {
     if (enemy.classList.contains("power-up")) {
-      activateBurstFire();
+      bigPiouPiou();
     } else {
       boumEnemy.play();
       scoreManager.updateScore(100);
@@ -288,7 +288,7 @@ function Controls() {
     const timeSinceLastShot = currentTime - lastShotTime;
 
     // ver normale
-    if (timeSinceLastShot > (burstFireActive ? 100 : 500)) {
+    if (timeSinceLastShot > (PiouPiou ? 100 : 500)) {
       ShootUp();
       lastShotTime = currentTime;
     }
@@ -329,7 +329,7 @@ if ("ontouchstart" in window) {
   document.addEventListener("touchend", function (e) {
     const currentTime = Date.now();
     const timeSinceLastShot = currentTime - lastShotTime;
-    if (timeSinceLastShot > (burstFireActive ? 100 : 500)) {
+    if (timeSinceLastShot > (PiouPiou ? 100 : 500)) {
       ShootUp();
       lastShotTime = currentTime;
     }
@@ -450,10 +450,11 @@ function adjustDifficulty(score) {
   }
 }
 
-function activateBurstFire() {
-  burstFireActive = true;
+function bigPiouPiou() {
+  PiouPiou = true;
+  audioMoney.play();
   setTimeout(() => {
-    burstFireActive = false;
+    PiouPiou = false;
   }, 10000); //10s
 }
 
