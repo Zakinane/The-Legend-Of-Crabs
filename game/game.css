@@ -64,6 +64,19 @@ a:hover {
 .high-score {
   color: red;
 }
+button{
+  color: white;
+  cursor: url("img/cursor/cursorHover.png"), auto;
+}
+.Facebook{
+  background-color: rgb(74, 74, 242);
+}
+.X{
+  background: rgb(50, 50, 50);
+}
+.social{
+  position: fixed;
+}
 
 /*Mobile*/
 @media screen and (max-width: 768px) {

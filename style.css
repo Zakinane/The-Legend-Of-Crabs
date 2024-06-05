@@ -76,7 +76,19 @@ a:hover {
   from {opacity: 0;}
   to {opacity: 1;}
 }
-
+button{
+  color: white;
+  cursor: url("img/cursor/cursorHover.png"), auto;
+}
+.Facebook{
+  background-color: rgb(74, 74, 242);
+}
+.X{
+  background: rgb(50, 50, 50);
+}
+.social{
+  position: fixed;
+}
 
 
 /*Mobile*/
