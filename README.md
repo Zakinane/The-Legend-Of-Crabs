@@ -1,7 +1,6 @@
-![THE LEGEND OF CRABS](https://github.com/Zakinane/The-Legend-Of-Crabs/assets/124632016/09ddf4a6-58ef-44f3-b2a2-09e8af2f5065)
 # ❗ Still in the making ❗
  # The Legend of Crabs
-
+![logo](https://github.com/Zakinane/The-Legend-Of-Crabs/assets/124632016/2b5a448f-3e37-40e7-8371-4bd5310e0a4b)
 Welcome to **The Legend of Crabs**, an exciting arcade game where you control Mr. Krabs to defend against waves of enemies. Score as many points as you can by shooting enemies and collecting power-ups. Avoid getting hit to survive and achieve the highest score!
 
 ## Table of Contents
