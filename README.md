@@ -18,6 +18,8 @@ Welcome to **The Legend of Crabs**, an exciting arcade game where you control Mr
 
 ## Gameplay
 
+![image](https://github.com/Zakinane/The-Legend-Of-Crabs/assets/124632016/8dda0fd1-120e-4d34-b54f-c274a953bfb1)
+
 In **The Legend of Crabs**, you control Mr. Crabs and shoot enemies descending from the top of the screen. Each enemy you destroy earns you points. Beware of enemy collisions, as they will result in a game over, and don't let them get to your restaurant !!
 
 ## Features
@@ -33,13 +35,17 @@ In **The Legend of Crabs**, you control Mr. Crabs and shoot enemies descending f
 
 ## Controls
 
-- **Left Arrow**: Move left
-- **Right Arrow**: Move right
-- **Spacebar**: Shoot
+- **Left Arrow**: Move left ![image](https://github.com/Zakinane/The-Legend-Of-Crabs/assets/124632016/f44c7508-340c-41a6-bc3b-b796b85d41f7)
+
+- **Right Arrow**: Move right ![image](https://github.com/Zakinane/The-Legend-Of-Crabs/assets/124632016/b0a39d11-682b-4010-8b62-bfd1e759ba19)
+
+- **Spacebar**: Shoot ![image](https://github.com/Zakinane/The-Legend-Of-Crabs/assets/124632016/66b942bf-98f1-407b-bf2c-1ac1565aceff)
 
 On mobile devices, use touch controls to move left or right and tap to shoot.
 
 ## Power-Ups
+
+![image](https://github.com/Zakinane/The-Legend-Of-Crabs/assets/124632016/71d8f0cc-086b-4570-a60d-fcb103b4fa64)
 
 Power-ups appear randomly. When collected, they enable burst fire mode, allowing you to shoot more rapidly for a limited duration.
 
