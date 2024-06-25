@@ -71,12 +71,12 @@ button{
 @media screen and (max-width: 768px) {
   .Coded-by {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    bottom: 10px;
+    right: 10px;
     height: 40px;
   }
   .credits {
-    display: none;
+    
   }
   .HS {
     display: flex;

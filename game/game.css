@@ -42,6 +42,15 @@ a:hover {
     top: 400px;
   }
 }
+@keyframes flikker {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .screen.going-up {
   animation: going-up 3s ease-in forwards;
 }
@@ -64,83 +73,112 @@ a:hover {
 .high-score {
   color: red;
 }
-button{
+button {
   color: white;
   cursor: url("img/cursor/cursorHover.png"), auto;
 }
-.Facebook{
+.Facebook {
   background-color: rgb(74, 74, 242);
 }
-.X{
+.X {
   background: rgb(50, 50, 50);
 }
-.social{
+.social {
   position: fixed;
 }
+.You {
+  position: absolute;
+  z-index: 103;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -1000px;
+  margin-bottom: 50px;
+  cursor: url("../img/cursor/cursorHover.png"), auto;
+  animation: decollage 1s 3s ease-in forwards;
+}
+@keyframes decollage {
+  0% {
+    bottom: -1000px;
+  }
+  100% {
+    bottom: 0px;
+  }
+}
+.enemy {
+  position: absolute;
+  z-index: 103;
+  top: -500px;
+  margin-top: 50px;
+}
+.projectile {
+  position: absolute;
+  z-index: 102;
+}
 
-/*Mobile*/
+/* ////////////////////////////////////////////////////////////////////////////////////////Mobile */
 @media screen and (max-width: 768px) {
   .SoundButton {
+    display: none;
     position: absolute;
     top: 10px;
     right: 10px;
     height: 40px;
   }
-  .Coded-by {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    height: 40px;
-  }
-  .moneyAudio {
-    display: none;
-  }
-  .credits {
-    display: none;
-  }
   .HS {
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: absolute;
+    right: 10px;
+    top: 10px;
     padding-bottom: 30px;
   }
-  .controls {
-    display: none;
+  .score {
+    color: rgb(255, 67, 67);
+    font-family: fantasy;
+    font-weight: lighter;
   }
-  .controlsPic {
-    display: none;
-  }
-  .controlsPicture {
+  .controls,
+  h5,
+  h2,
+  .controlsPic,
+  .controlsPicture,
+  .credits,
+  .moneyAudio,
+  button {
     display: none;
   }
   .container {
     width: 100vw;
     height: 100vh;
-    /*???*/
-  }
-  h5 {
-    display: none;
-  }
-  H2 {
-    display: none;
+    display: grid;
+    grid-template-columns: 20fr 0fr 0fr;
   }
   .You {
-    width: 20px;
+    width: 60px;
   }
   .enemy {
-    width: 15px;
+    width: 45px;
   }
   .projectile {
-    height: 7px;
+    height: 18px;
   }
 }
 
 /*Tablette*/
-@media screen and (max-width: 1024px) {
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  button {
+    display: none;
+  }
   .HS {
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: absolute;
+    right: 6%;
+    top: 40%;
     padding-bottom: 30px;
   }
   .score {
@@ -155,12 +193,24 @@ button{
     align-items: center;
     flex-direction: column;
   }
+  .Coded-by {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    height: 40px;
+  }
   .controls {
     color: green;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+  }
+  .container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
   }
   .controlsPic {
     display: flex;
@@ -170,12 +220,6 @@ button{
   }
   .controlsPicture {
     height: 30px;
-  }
-  .container {
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
   }
   .You {
     width: 60px;
@@ -198,9 +242,13 @@ button{
     flex-direction: column;
   }
   .HS {
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: absolute;
+    right: 10%;
+    top: 40%;
     padding-bottom: 30px;
   }
   .score {
@@ -215,8 +263,20 @@ button{
     justify-content: center;
     flex-direction: column;
   }
+  .Coded-by {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    height: 40px;
+  }
   h5 {
     font-weight: lighter;
+  }
+  .container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
   }
   .controlsPic {
     display: flex;
@@ -234,34 +294,12 @@ button{
     grid-template-columns: 1fr 1.5fr 1fr;
   }
   .You {
-    position: absolute;
-    z-index: 103;
     width: 70px;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -1000px;
-    margin-bottom: 50px;
-    cursor: url("../img/cursor/cursorHover.png"), auto;
-    animation: decollage 1s 3s ease-in forwards;
-  }
-  @keyframes decollage {
-    0% {
-      bottom: -1000px;
-    }
-    100% {
-      bottom: 0px;
-    }
   }
   .enemy {
-    position: absolute;
-    z-index: 103;
     width: 50px;
-    top: -500px;
-    margin-top: 50px;
   }
   .projectile {
-    position: absolute;
     height: 20px;
-    z-index: 102;
   }
 }
