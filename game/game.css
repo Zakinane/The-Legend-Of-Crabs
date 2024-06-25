@@ -272,12 +272,6 @@ button {
   h5 {
     font-weight: lighter;
   }
-  .container {
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-  }
   .controlsPic {
     display: flex;
     gap: 20px;

@@ -57,13 +57,13 @@ button{
   color: white;
   cursor: url("img/cursor/cursorHover.png"), auto;
 }
-.Facebook{
+.Facebook {
   background-color: rgb(74, 74, 242);
 }
-.X{
+.X {
   background: rgb(50, 50, 50);
 }
-.social{
+.social {
   position: fixed;
 }
 
@@ -75,39 +75,36 @@ button{
     right: 10px;
     height: 40px;
   }
-  .credits {
-    
-  }
   .HS {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-bottom: 30px;
   }
-  .controls {
-    display: none;
-  }
-  .controlsPic {
-    display: none;
-  }
-  .controlsPicture {
+  .controls,
+  h5,
+  h2,
+  .controlsPic,
+  .controlsPicture,
+  .moneyAudio {
     display: none;
   }
   .container {
     width: 100vw;
     height: 100vh;
-    /*???*/
-  }
-  h5 {
-    display: none;
-  }
-  H2 {
-    display: none;
+    display: grid;
+    grid-template-columns: 20fr 0fr 0fr;
   }
 }
 
 /*Tablette*/
 @media screen and (max-width: 1024px) {
+  .Coded-by {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    height: 40px;
+  }
   .HS {
     display: flex;
     flex-direction: column;
@@ -152,6 +149,12 @@ button{
 
 /*PC*/
 @media screen and (min-width: 1024px) {
+  .Coded-by {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    height: 40px;
+  }
   .credits {
     color: white;
     display: flex;
