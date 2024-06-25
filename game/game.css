@@ -4,6 +4,7 @@
 }
 * {
   margin: 0px;
+  touch-action: manipulation;
 }
 main {
   background-color: #051630;
