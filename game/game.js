@@ -156,9 +156,16 @@ function moveEnemy(enemy) {
   enemy.style.top = currentTop + enemySpeed + "px";
 
   if (currentTop >= screen.offsetHeight) {
-    enemy.remove();
-    const index = enemies.indexOf(enemy);
-    if (index > -1) enemies.splice(index, 1);
+    if (!enemy.getAttribute("data-dead")) {
+      if (enemy.classList.contains("power-up")) {
+        enemy.remove();
+        const index = enemies.indexOf(enemy);
+        if (index > -1) enemies.splice(index, 1);
+      } else {
+        animateScreen();
+        gameOver();
+      }
+    }
   } else {
     requestAnimationFrame(() => moveEnemy(enemy));
   }
@@ -205,7 +212,7 @@ function deathEnemy(enemy, projRect) {
     if (enemy.classList.contains("power-up")) {
       bigPiouPiou();
       setTimeout(() => {
-        enemy.remove(); // Supprime le power-up après un court délai
+        enemy.remove();
         const index = enemies.indexOf(enemy);
         if (index > -1) enemies.splice(index, 1);
       }, 0);
@@ -218,7 +225,6 @@ function deathEnemy(enemy, projRect) {
   }
   return false;
 }
-
 
 
 //////////////////////////////////////////////////////////////////////////////////////////ACTIONS
