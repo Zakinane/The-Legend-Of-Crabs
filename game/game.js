@@ -156,18 +156,14 @@ function moveEnemy(enemy) {
   enemy.style.top = currentTop + enemySpeed + "px";
 
   if (currentTop >= screen.offsetHeight) {
-    if (enemy.classList.contains("power-up")) {
-      enemy.remove();
-      const index = enemies.indexOf(enemy);
-      if (index > -1) enemies.splice(index, 1);
-    } else if (!enemy.getAttribute("data-dead")) {
-      animateScreen();
-      gameOver();
-    }
+    enemy.remove();
+    const index = enemies.indexOf(enemy);
+    if (index > -1) enemies.splice(index, 1);
   } else {
     requestAnimationFrame(() => moveEnemy(enemy));
   }
 }
+
 
 function animateEnemyDeath(enemy) {
   const explosionFrames = [
@@ -208,6 +204,11 @@ function deathEnemy(enemy, projRect) {
   ) {
     if (enemy.classList.contains("power-up")) {
       bigPiouPiou();
+      setTimeout(() => {
+        enemy.remove(); // Supprime le power-up après un court délai
+        const index = enemies.indexOf(enemy);
+        if (index > -1) enemies.splice(index, 1);
+      }, 0);
     } else {
       boumEnemy.play();
       scoreManager.updateScore(100);
@@ -217,6 +218,8 @@ function deathEnemy(enemy, projRect) {
   }
   return false;
 }
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////ACTIONS
 function goLeft() {
@@ -411,13 +414,14 @@ function gameOver() {
 
 function checkCollisions() {
   enemies.forEach((enemy) => {
-    if (!enemy.getAttribute("data-dead")) {
+    if (!enemy.getAttribute("data-dead") && !enemy.classList.contains("power-up")) {
       if (death(enemy, You)) {
         gameOver();
       }
     }
   });
 }
+
 
 function stopGame() {
   enemies.forEach((enemy) => enemy.remove());
