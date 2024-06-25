@@ -99,10 +99,10 @@ button{
     right: 10px;
     height: 40px;
   }
-  .Coded-by{
+  .Coded-by {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    bottom: 10px;
+    right: 10px;
     height: 40px;
   }
   .credits {
@@ -129,6 +129,12 @@ button{
 
 /*Tablette*/
 @media screen and (max-width: 1024px) {
+  .Coded-by {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    height: 40px;
+  }
   .credits {
     color: white;
     display: flex;
@@ -171,6 +177,12 @@ button{
 
 /*PC*/
 @media screen and (min-width: 1024px) {
+  .Coded-by {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    height: 40px;
+  }
   .container {
     width: 100vw;
     height: 100vh;
