@@ -63,7 +63,8 @@ The game difficulty increases as your score gets higher:
 ## How-to-play
 
 It's simple ! use this link :
-# Link : https://zakinane.github.io/The-Legend-Of-Crabs/
+# Link 1 : https://the-legend-of-crabs.vercel.app/
+# Link 2 : https://zakinane.github.io/The-Legend-Of-Crabs/
 
 ## Contributing
 
